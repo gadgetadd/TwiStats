@@ -3,26 +3,28 @@ import TweetList from '../components/TweetList/TweetList';
 import { incrementPage } from '../redux/usersSlice';
 
 import DropDown from '../components/DropDown/DropDown';
-import { selectIsLoading, selectIsOver } from '../redux/selectors';
+import { selectIsLoading, selectIsMore } from '../redux/selectors';
 
 function Tweets() {
   const dispatch = useDispatch();
-  const isOver = useSelector(selectIsOver);
+  const isMore = useSelector(selectIsMore);
   const isLoading = useSelector(selectIsLoading);
-
+  console.log(isMore);
   return (
     <>
       <DropDown />
       <TweetList />
-      <button
-        disabled={isLoading}
-        onClick={() => {
-          dispatch(incrementPage());
-        }}
-        type="button"
-      >
-        {isOver ? 'End' : 'LoadMore'}
-      </button>
+      {isMore && (
+        <button
+          disabled={isLoading}
+          onClick={() => {
+            dispatch(incrementPage());
+          }}
+          type="button"
+        >
+          LoadMore
+        </button>
+      )}
     </>
   );
 }

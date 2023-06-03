@@ -9,7 +9,7 @@ import {
 
 const handlePending = state => {
     state.isLoading = true;
-    state.isOver = false
+
 };
 
 const handleRejected = state => {
@@ -22,7 +22,7 @@ const usersSlice = createSlice({
         items: [],
         isLoading: false,
         isToggling: false,
-        isOver: false,
+        isMore: false,
         page: 1,
         filter: FILTERS.all
     },
@@ -42,18 +42,14 @@ const usersSlice = createSlice({
             .addCase(fetchFirst.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.items = action.payload;
-                if (action.payload.length < CARD_LIMIT) {
-                    state.isOver = true
-                }
+                state.isMore = (action.payload.length < CARD_LIMIT) ? false : true;
             })
             .addCase(fetchFirst.rejected, handleRejected)
             .addCase(fetchMore.pending, handlePending)
             .addCase(fetchMore.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.items.push(...action.payload);
-                if (action.payload.length < CARD_LIMIT) {
-                    state.isOver = true
-                }
+                state.isMore = (action.payload.length < CARD_LIMIT) ? false : true;
             })
             .addCase(fetchMore.rejected, handleRejected)
             .addCase(toggleFollowing.pending, state => {
