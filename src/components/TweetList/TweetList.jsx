@@ -5,15 +5,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchFirst, fetchMore } from '../../redux/operations';
 import { FILTERS } from '../../constants';
+import { selectFilter, selectPage, selectUsers } from '../../redux/selectors';
 
 function TweetList() {
-  const page = useSelector(state => state.users.page);
-  const filter = useSelector(state => state.users.filter);
+  const users = useSelector(selectUsers);
+  const page = useSelector(selectPage);
+  const filter = useSelector(selectFilter);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('filter', filter);
     const fetchParams = { page };
     switch (filter) {
       case FILTERS.follow:
@@ -32,7 +33,6 @@ function TweetList() {
     }
   }, [dispatch, filter, page]);
 
-  const users = useSelector(state => state.users.items);
 
   return users.map(user => <TweetItem user={user} key={user.id} />);
 }

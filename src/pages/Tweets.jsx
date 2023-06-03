@@ -3,14 +3,11 @@ import TweetList from '../components/TweetList/TweetList';
 import { incrementPage } from '../redux/usersSlice';
 
 import DropDown from '../components/DropDown/DropDown';
-
+import { selectIsOver } from '../redux/selectors';
 
 function Tweets() {
-
   const dispatch = useDispatch();
-  const isOver = useSelector(state => state.users.isOver);
- 
-   
+  const isOver = useSelector(selectIsOver);
 
   return (
     <>
