@@ -62,6 +62,7 @@ const usersSlice = createSlice({
             .addCase(toggleFollowing.fulfilled, (state, action) => {
                 const index = state.items.findIndex(user => user.id === action.payload.id);
                 state.items.splice(index, 1, action.payload)
+                state.isToggling = false;
             }).addCase(toggleFollowing.rejected, state => {
                 state.isToggling = false;
             })

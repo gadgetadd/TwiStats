@@ -1,10 +1,23 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleFollowing } from '../../redux/operations';
 import { toast } from 'react-toastify';
+import { selectIsToggling } from '../../redux/selectors';
+import logo from '../../images/logo.png';
+import avatar from '../../images/avatar.png';
+import {
+  Avatar,
+  AvatarFrame,
+  AvatarThumb,
+  Description,
+  FollowButton,
+  Logo,
+  UserCard,
+} from './TweetItem.styled';
 
 function TweetItem({ user }) {
   const dispatch = useDispatch();
+  const isToggling = useSelector(selectIsToggling);
 
   const handleToggleFollowing = async () => {
     const payload = {
@@ -23,15 +36,32 @@ function TweetItem({ user }) {
   };
 
   return (
-    <div
-      style={{ display: 'flex', width: 300, justifyContent: 'space-between' }}
-    >
-      <p>{user.user}</p>
-      <p>{user.followers}</p>
-      <button onClick={handleToggleFollowing} type="button">
-        {user.isFollowing ? 'Following' : 'Follow'}
-      </button>
-    </div>
+    <li>
+      <UserCard>
+        <Logo src={logo} alt="logo" />
+        <AvatarFrame>
+          <AvatarThumb>
+            <Avatar
+              src={user.avatar ? user.avatar : avatar}
+              alt="User avatar"
+              title={user.user}
+            />
+          </AvatarThumb>
+        </AvatarFrame>
+        <Description>{user.tweets.toLocaleString('en-US')} tweets</Description>
+        <Description>
+          {user.followers.toLocaleString('en-US')} followers
+        </Description>
+        <FollowButton
+          type="button"
+          disabled={isToggling}
+          isFollowing={user.isFollowing}
+          onClick={handleToggleFollowing}
+        >
+          {user.isFollowing ? 'Following' : 'Follow'}
+        </FollowButton>
+      </UserCard>
+    </li>
   );
 }
 

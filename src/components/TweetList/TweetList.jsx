@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { fetchFirst, fetchMore } from '../../redux/operations';
 import { FILTERS } from '../../constants';
 import { selectFilter, selectPage, selectUsers } from '../../redux/selectors';
+import { CardList } from './TweetList.styled';
 
 function TweetList() {
   const users = useSelector(selectUsers);
@@ -33,8 +34,13 @@ function TweetList() {
     }
   }, [dispatch, filter, page]);
 
-
-  return users.map(user => <TweetItem user={user} key={user.id} />);
+  return (
+    <CardList>
+      {users.map(user => (
+        <TweetItem user={user} key={user.id} />
+      ))}
+    </CardList>
+  );
 }
 
 export default TweetList;
