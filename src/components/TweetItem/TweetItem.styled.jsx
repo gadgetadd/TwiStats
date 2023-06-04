@@ -53,6 +53,11 @@ export const AvatarFrame = styled.div`
     inset 0px -2.19582px 4.39163px #ae7be3,
     inset 0px 4.39163px 3.29372px #fbf8ff;
   border-radius: 50%;
+  transition: transform 300ms ease;
+  &:hover,
+  &:focus {
+    transform: scale(1.5);
+  }
 `;
 
 export const AvatarThumb = styled.div`
@@ -83,8 +88,8 @@ export const FollowButton = styled(Button)`
   height: 50px;
   margin-top: 26px;
   margin-bottom: 36px;
-  background-color: ${({ isFollowing }) =>
-    isFollowing ? '#5CD3A8' : '#EBD8FF'};
+  background-color: ${({ following }) =>
+    following === 'true' ? '#5CD3A8' : '#EBD8FF'};
   color: #373737;
   border: none;
   border-radius: 10px;
@@ -103,7 +108,7 @@ export const FollowButton = styled(Button)`
 
   &:hover,
   &:focus {
-    background-color: ${({ isFollowing }) =>
-      isFollowing ? '#4BAF90' : '#d4b8fa'};
+    background-color: ${({ following }) =>
+      following === 'true' ? '#4BAF90' : '#d4b8fa'};
   }
 `;

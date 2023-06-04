@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toggleFollowing } from '../../redux/operations';
 import { toast } from 'react-toastify';
-
+import Tooltip from '@mui/joy/Tooltip';
 import logo from '../../images/logo.png';
 import avatar from '../../images/avatar.png';
 import {
@@ -45,23 +45,30 @@ function TweetItem({ user }) {
     <li>
       <UserCard>
         <Logo src={logo} alt="logo" />
-        <AvatarFrame>
-          <AvatarThumb>
-            <Avatar
-              src={user.avatar ? user.avatar : avatar}
-              alt="User avatar"
-              title={user.user}
-            />
-          </AvatarThumb>
-        </AvatarFrame>
+        <Tooltip
+          size="lg"
+          placement="top"
+          arrow
+          title={user.user}
+          variant="solid"
+        >
+          <AvatarFrame>
+            <AvatarThumb>
+              <Avatar
+                src={user.avatar ? user.avatar : avatar}
+                alt="User avatar"
+              />
+            </AvatarThumb>
+          </AvatarFrame>
+        </Tooltip>
         <Description>{user.tweets.toLocaleString('en-US')} tweets</Description>
         <Description>
           {user.followers.toLocaleString('en-US')} followers
         </Description>
         <FollowButton
-                    color="info"
+          color="info"
           loading={isLoading}
-          isFollowing={user.isFollowing}
+          following={user.isFollowing.toString()}
           onClick={handleToggleFollowing}
         >
           {user.isFollowing ? 'Following' : 'Follow'}

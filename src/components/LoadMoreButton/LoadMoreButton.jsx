@@ -13,16 +13,17 @@ function LoadMoreButton() {
     isMore && (
       <Button
         sx={{
+          textTransform: 'uppercase',
           width: 380,
           mb: 4,
         }}
         color="info"
-        variant="outlined"
+        size="lg"
+        variant="soft"
         loading={isLoading}
         onClick={() => {
           dispatch(incrementPage());
         }}
-        type="button"
       >
         Load More
       </Button>

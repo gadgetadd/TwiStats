@@ -16,6 +16,7 @@ function DropDown() {
         my: 4,
       }}
       color="info"
+      size="lg"
       defaultValue={FILTERS.all}
       onChange={handleChange}
     >
