@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import background from '../../images/background.png';
+import Button from '@mui/joy/Button';
 
 export const UserCard = styled.div`
   position: relative;
@@ -77,7 +78,7 @@ export const Description = styled.p`
   color: #ebd8ff;
 `;
 
-export const FollowButton = styled.button`
+export const FollowButton = styled(Button)`
   width: 196px;
   height: 50px;
   margin-top: 26px;
@@ -98,10 +99,6 @@ export const FollowButton = styled.button`
 
   &:active {
     box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25) inset;
-  }
-
-  &:disabled {
-    pointer-events: none;
   }
 
   &:hover,

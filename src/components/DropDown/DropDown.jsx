@@ -14,10 +14,8 @@ function DropDown() {
       sx={{
         width: 380,
         my: 4,
-        mx: 'auto',
       }}
       color="info"
-      size="md"
       defaultValue={FILTERS.all}
       onChange={handleChange}
     >

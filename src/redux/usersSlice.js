@@ -21,7 +21,6 @@ const usersSlice = createSlice({
     initialState: {
         items: [],
         isLoading: false,
-        isToggling: false,
         isMore: false,
         page: 1,
         filter: FILTERS.all
@@ -52,15 +51,11 @@ const usersSlice = createSlice({
                 state.isMore = (action.payload.length < CARD_LIMIT) ? false : true;
             })
             .addCase(fetchMore.rejected, handleRejected)
-            .addCase(toggleFollowing.pending, state => {
-                state.isToggling = true;
-            })
+
             .addCase(toggleFollowing.fulfilled, (state, action) => {
                 const index = state.items.findIndex(user => user.id === action.payload.id);
                 state.items.splice(index, 1, action.payload)
-                state.isToggling = false;
-            }).addCase(toggleFollowing.rejected, state => {
-                state.isToggling = false;
+
             })
     }
 })

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleFollowing } from '../../redux/operations';
 import { toast } from 'react-toastify';
-import { selectIsToggling } from '../../redux/selectors';
+
 import logo from '../../images/logo.png';
 import avatar from '../../images/avatar.png';
 import {
@@ -14,10 +14,14 @@ import {
   Logo,
   UserCard,
 } from './TweetItem.styled';
+import { useState } from 'react';
 
 function TweetItem({ user }) {
   const dispatch = useDispatch();
-  const isToggling = useSelector(selectIsToggling);
+
+  const [isLoading, setLoading] = useState(false);
+
+  const cancelLoading = () => setLoading(false);
 
   const handleToggleFollowing = async () => {
     const payload = {
@@ -25,14 +29,16 @@ function TweetItem({ user }) {
       isFollowing: !user.isFollowing,
       followers: user.isFollowing ? user.followers - 1 : user.followers + 1,
     };
-
-    toast.promise(() => dispatch(toggleFollowing(payload)), {
-      pending: 'Just a moment, please.',
-      success: user.isFollowing
-        ? `You have unfollowed ${user.user} successfully.`
-        : `Congrats!  You're now following ${user.user}.`,
-      error: 'Please, try again',
-    });
+    setLoading(true);
+    toast
+      .promise(() => dispatch(toggleFollowing(payload)), {
+        pending: 'Just a moment, please.',
+        success: user.isFollowing
+          ? `You have unfollowed ${user.user} successfully.`
+          : `Congrats!  You're now following ${user.user}.`,
+        error: 'Please, try again',
+      })
+      .finally(cancelLoading);
   };
 
   return (
@@ -53,8 +59,8 @@ function TweetItem({ user }) {
           {user.followers.toLocaleString('en-US')} followers
         </Description>
         <FollowButton
-          type="button"
-          disabled={isToggling}
+                    color="info"
+          loading={isLoading}
           isFollowing={user.isFollowing}
           onClick={handleToggleFollowing}
         >

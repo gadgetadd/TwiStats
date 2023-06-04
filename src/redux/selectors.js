@@ -8,4 +8,4 @@ export const selectIsMore = state => state.users.isMore
 
 export const selectIsLoading = state => state.users.isLoading
 
-export const selectIsToggling = state => state.users.isToggling
+

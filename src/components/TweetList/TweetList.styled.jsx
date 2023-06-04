@@ -6,5 +6,6 @@ export const CardList = styled.ul`
   gap: 48px;
   padding: 0;
   margin: 0;
+  margin-bottom: 32px;
   list-style: none;
 `;
