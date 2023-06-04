@@ -9,10 +9,13 @@ import {
 
 const handlePending = state => {
     state.isLoading = true;
+    state.isError = false;
 };
 
 const handleRejected = state => {
     state.isLoading = false;
+    state.isError = true;
+
 };
 
 const usersSlice = createSlice({
@@ -20,9 +23,10 @@ const usersSlice = createSlice({
     initialState: {
         items: [],
         isLoading: false,
+        isError: false,
         isMore: false,
         page: 1,
-        filter: FILTERS.all
+        filter: FILTERS.all,
     },
     reducers: {
         incrementPage: (state) => {
