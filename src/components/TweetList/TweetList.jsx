@@ -5,6 +5,7 @@ import { fetchFirst, fetchMore } from '../../redux/operations';
 import { selectFilter, selectPage, selectUsers } from '../../redux/selectors';
 import TweetItem from '../TweetItem/TweetItem';
 import { CardList } from './TweetList.styled';
+import EmptyAnimation from '../EmptyAnimation/EmptyAnimation';
 
 function TweetList() {
   const users = useSelector(selectUsers);
@@ -32,6 +33,9 @@ function TweetList() {
     }
   }, [dispatch, filter, page]);
 
+  if (users.length === 0) {
+    return <EmptyAnimation />;
+  }
   return (
     <CardList>
       {users.map(user => (

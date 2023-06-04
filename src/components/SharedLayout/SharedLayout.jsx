@@ -1,5 +1,7 @@
 import { Suspense } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
+import GoBackButton from '../GoBackButton/GoBackButton';
+import Backdrop from '../Backdrop/Backdrop';
 import {
   Container,
   Footer,
@@ -8,12 +10,11 @@ import {
   Title,
   About,
 } from './SharedLayout.styled';
-import GoBackButton from '../GoBackButton/GoBackButton';
 
 function SharedLayout() {
   const location = useLocation();
   const isTweetPage = location.pathname === '/tweets';
-  
+
   return (
     <>
       <Header>
@@ -24,7 +25,7 @@ function SharedLayout() {
       </Header>
       <Main>
         <Container>
-          <Suspense fallback={<div>Loading page...</div>}>
+          <Suspense fallback={<Backdrop />}>
             <Outlet />
           </Suspense>
         </Container>
