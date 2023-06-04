@@ -1,6 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/joy/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 function GoBackButton() {

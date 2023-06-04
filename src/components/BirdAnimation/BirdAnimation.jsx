@@ -12,7 +12,6 @@ function BirdAnimation() {
       autoplay: true,
       path: 'https://assets3.lottiefiles.com/packages/lf20_nkf5e15x.json',
     });
-
     return () => anim.destroy();
   }, []);
 

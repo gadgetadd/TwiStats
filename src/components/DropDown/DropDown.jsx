@@ -1,14 +1,16 @@
+import { useDispatch } from 'react-redux';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import { useDispatch } from 'react-redux';
 import { FILTERS } from '../../constants';
 import { setFilter } from '../../redux/usersSlice';
 
 function DropDown() {
   const dispatch = useDispatch();
+
   const handleChange = (_, newValue) => {
     dispatch(setFilter(newValue));
   };
+
   return (
     <Select
       sx={{

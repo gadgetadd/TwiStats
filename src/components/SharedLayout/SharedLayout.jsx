@@ -1,6 +1,5 @@
-import { useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useLocation, Outlet } from 'react-router-dom';
 import {
   Container,
   Footer,
@@ -13,8 +12,8 @@ import GoBackButton from '../GoBackButton/GoBackButton';
 
 function SharedLayout() {
   const location = useLocation();
-
   const isTweetPage = location.pathname === '/tweets';
+  
   return (
     <>
       <Header>

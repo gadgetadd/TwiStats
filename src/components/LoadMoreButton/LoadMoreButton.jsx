@@ -1,11 +1,10 @@
-import { incrementPage } from '../../redux/usersSlice';
-import Button from '@mui/joy/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '@mui/joy/Button';
+import { incrementPage } from '../../redux/usersSlice';
 import { selectIsLoading, selectIsMore } from '../../redux/selectors';
 
 function LoadMoreButton() {
   const dispatch = useDispatch();
-
   const isLoading = useSelector(selectIsLoading);
   const isMore = useSelector(selectIsMore);
 

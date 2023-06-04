@@ -10,19 +10,6 @@ export const Header = styled.header`
   );
 `;
 
-export const Main = styled.main`
-  background-color: #f9f9e197;
-  min-height: calc(100vh - 128px);
-`;
-
-export const Title = styled.h2`
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: #ebd8ff;
-  margin: 15px 0;
-`;
-
 export const Container = styled.div`
   position: relative;
   display: flex;
@@ -38,6 +25,19 @@ export const Container = styled.div`
   @media screen and (min-width: 1268px) {
     width: 1268px;
   }
+`;
+
+export const Main = styled.main`
+  background-color: #f9f9e197;
+  min-height: calc(100vh - 128px);
+`;
+
+export const Title = styled.h2`
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ebd8ff;
+  margin: 15px 0;
 `;
 
 export const Footer = styled.footer`

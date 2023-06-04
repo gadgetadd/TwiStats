@@ -1,8 +1,9 @@
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import Tweets from './pages/Tweets';
 import Home from './pages/Home';
-import { Route, Routes, Navigate } from 'react-router-dom';
 
 function App() {
   return (

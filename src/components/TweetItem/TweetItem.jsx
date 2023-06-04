@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { toggleFollowing } from '../../redux/operations';
 import { toast } from 'react-toastify';
 import Tooltip from '@mui/joy/Tooltip';
+import { toggleFollowing } from '../../redux/operations';
 import logo from '../../images/logo.png';
-import avatar from '../../images/avatar.png';
+import reserveAvatar from '../../images/avatar.png';
 import {
   Avatar,
   AvatarFrame,
@@ -14,27 +15,26 @@ import {
   Logo,
   UserCard,
 } from './TweetItem.styled';
-import { useState } from 'react';
 
-function TweetItem({ user }) {
+function TweetItem({
+  user: { avatar, user, tweets, followers, isFollowing, id },
+}) {
   const dispatch = useDispatch();
-
   const [isLoading, setLoading] = useState(false);
-
   const cancelLoading = () => setLoading(false);
 
   const handleToggleFollowing = async () => {
     const payload = {
-      id: user.id,
-      isFollowing: !user.isFollowing,
-      followers: user.isFollowing ? user.followers - 1 : user.followers + 1,
+      id: id,
+      isFollowing: !isFollowing,
+      followers: isFollowing ? followers - 1 : followers + 1,
     };
     setLoading(true);
     dispatch(toggleFollowing(payload))
       .then(() =>
-        user.isFollowing
-          ? toast.info(`You have unfollowed ${user.user} successfully.`)
-          : toast.success(`Congrats!  You're now following ${user.user}.`)
+        isFollowing
+          ? toast.info(`You have unfollowed ${user} successfully.`)
+          : toast.success(`Congrats!  You're now following ${user}.`)
       )
       .catch(() => toast.error('Something went wrong. Try to reload the page'))
       .finally(cancelLoading);
@@ -44,33 +44,22 @@ function TweetItem({ user }) {
     <li>
       <UserCard>
         <Logo src={logo} alt="logo" />
-        <Tooltip
-          size="lg"
-          placement="top"
-          arrow
-          title={user.user}
-          variant="solid"
-        >
+        <Tooltip size="lg" placement="top" arrow title={user} variant="solid">
           <AvatarFrame>
             <AvatarThumb>
-              <Avatar
-                src={user.avatar ? user.avatar : avatar}
-                alt="User avatar"
-              />
+              <Avatar src={avatar ? avatar : reserveAvatar} alt="User avatar" />
             </AvatarThumb>
           </AvatarFrame>
         </Tooltip>
-        <Description>{user.tweets.toLocaleString('en-US')} tweets</Description>
-        <Description>
-          {user.followers.toLocaleString('en-US')} followers
-        </Description>
+        <Description>{tweets.toLocaleString('en-US')} tweets</Description>
+        <Description>{followers.toLocaleString('en-US')} followers</Description>
         <FollowButton
           color="info"
           loading={isLoading}
-          following={user.isFollowing.toString()}
+          following={isFollowing.toString()}
           onClick={handleToggleFollowing}
         >
-          {user.isFollowing ? 'Following' : 'Follow'}
+          {isFollowing ? 'Following' : 'Follow'}
         </FollowButton>
       </UserCard>
     </li>
@@ -78,9 +67,14 @@ function TweetItem({ user }) {
 }
 
 TweetItem.propTypes = {
-  followers: PropTypes.any,
-  tweets: PropTypes.any,
-  user: PropTypes.any,
+  user: PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
+    tweets: PropTypes.number.isRequired,
+    followers: PropTypes.number.isRequired,
+    isFollowing: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default TweetItem;

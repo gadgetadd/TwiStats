@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux';
-import TweetItem from '../TweetItem/TweetItem';
-
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchFirst, fetchMore } from '../../redux/operations';
+import { useSelector, useDispatch } from 'react-redux';
 import { FILTERS } from '../../constants';
+import { fetchFirst, fetchMore } from '../../redux/operations';
 import { selectFilter, selectPage, selectUsers } from '../../redux/selectors';
+import TweetItem from '../TweetItem/TweetItem';
 import { CardList } from './TweetList.styled';
 
 function TweetList() {

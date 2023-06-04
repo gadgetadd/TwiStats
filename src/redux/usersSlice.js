@@ -9,7 +9,6 @@ import {
 
 const handlePending = state => {
     state.isLoading = true;
-
 };
 
 const handleRejected = state => {
@@ -34,7 +33,6 @@ const usersSlice = createSlice({
             state.page = 1;
         },
     },
-
     extraReducers: builder => {
         builder
             .addCase(fetchFirst.pending, handlePending)
@@ -51,11 +49,9 @@ const usersSlice = createSlice({
                 state.isMore = (action.payload.length < CARD_LIMIT) ? false : true;
             })
             .addCase(fetchMore.rejected, handleRejected)
-
             .addCase(toggleFollowing.fulfilled, (state, action) => {
                 const index = state.items.findIndex(user => user.id === action.payload.id);
                 state.items.splice(index, 1, action.payload)
-
             })
     }
 })

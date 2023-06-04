@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import BirdAnimation from '../components/BirdAnimation/BirdAnimation';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
+import BirdAnimation from '../components/BirdAnimation/BirdAnimation';
 
 function Home() {
   const navigate = useNavigate();
+
   return (
     <>
       <BirdAnimation />
@@ -42,4 +43,5 @@ function Home() {
     </>
   );
 }
+
 export default Home;
