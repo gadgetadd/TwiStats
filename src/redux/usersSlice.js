@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { CARD_LIMIT, FILTERS } from '../constants';
+import { CARD_LIMIT, FILTERS } from '../constants/constants';
 import {
     fetchFirst,
     fetchMore,

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import { FILTERS } from '../../constants';
+import { FILTERS } from '../../constants/constants';
 import { setFilter } from '../../redux/usersSlice';
 
 function DropDown() {

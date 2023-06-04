@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FILTERS } from '../../constants';
+import { FILTERS } from '../../constants/constants';
 import { fetchFirst, fetchMore } from '../../redux/operations';
 import {
   selectFilter,
   selectPage,
   selectUsers,
   selectIsError,
+  selectIsLoading,
 } from '../../redux/selectors';
 import TweetItem from '../TweetItem/TweetItem';
 import { CardList } from './TweetList.styled';
@@ -18,6 +19,7 @@ function TweetList() {
   const page = useSelector(selectPage);
   const filter = useSelector(selectFilter);
   const isError = useSelector(selectIsError);
+  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
@@ -44,7 +46,7 @@ function TweetList() {
     return <ErrorAnimation />;
   }
 
-  if (users.length === 0) {
+  if (users.length === 0 && !isLoading) {
     return <EmptyAnimation />;
   }
 
