@@ -30,14 +30,13 @@ function TweetItem({ user }) {
       followers: user.isFollowing ? user.followers - 1 : user.followers + 1,
     };
     setLoading(true);
-    toast
-      .promise(() => dispatch(toggleFollowing(payload)), {
-        pending: 'Just a moment, please.',
-        success: user.isFollowing
-          ? `You have unfollowed ${user.user} successfully.`
-          : `Congrats!  You're now following ${user.user}.`,
-        error: 'Please, try again',
-      })
+    dispatch(toggleFollowing(payload))
+      .then(() =>
+        user.isFollowing
+          ? toast.info(`You have unfollowed ${user.user} successfully.`)
+          : toast.success(`Congrats!  You're now following ${user.user}.`)
+      )
+      .catch(() => toast.error('Something went wrong. Try to reload the page'))
       .finally(cancelLoading);
   };
 

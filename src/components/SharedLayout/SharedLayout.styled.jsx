@@ -12,7 +12,7 @@ export const Header = styled.header`
 
 export const Main = styled.main`
   background-color: #f9f9e197;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 128px);
 `;
 
 export const Title = styled.h2`

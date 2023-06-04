@@ -36,7 +36,7 @@ const ScrollUpButton = () => {
           bottom: 16,
           right: 16,
         }}
-        size="lg"
+        size="md"
         color="info"
         aria-label="scroll back to top"
         onClick={handleClick}
